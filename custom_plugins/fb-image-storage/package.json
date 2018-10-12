@@ -1,0 +1,14 @@
+{
+  "name": "fb-image-storage",
+  "version": "1.0.0",
+  "description": "firebase storage tool",
+  "main": "fbimagestorage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Johnston",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^5.5.4"
+  }
+}

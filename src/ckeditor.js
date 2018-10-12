@@ -27,7 +27,8 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
 // custom plugins
-import SimpleUpload from 'ckeditor5-simple-upload/src/simpleupload';
+// import SimpleUpload from 'ckeditor5-simple-upload/src/simpleupload';
+import FbImageStorage from '../custom_plugins/fb-image-storage/fbimagestorage';
 
 export default class InlineEditor extends InlineEditorBase {}
 
@@ -52,7 +53,7 @@ InlineEditor.builtinPlugins = [
 	Paragraph,
 	Table,
 	TableToolbar,
-	SimpleUpload
+	FbImageStorage
 ];
 
 // Editor configuration.
