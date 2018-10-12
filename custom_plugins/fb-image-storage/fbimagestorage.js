@@ -14,16 +14,10 @@ export default class FbImageStorage extends Plugin {
 	}
 
 	init() {
-		// const fbConfig = this.editor.config.get('fbImageStorage.fbConfig');
+
 		const storageRef = this.editor.config.get('fbImageStorage.storageRef');
 
-		// if (!fbConfig) {
-		// 	console.warn('FbImageStorage will not work without firebase configuration.');
-		// 	return;
-		// }
-
-
-		// this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, fbConfig, storagePath, this.editor.t);
 		this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(storageRef, loader, this.editor.t);
+
 	}
 }
