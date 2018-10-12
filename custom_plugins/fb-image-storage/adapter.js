@@ -19,11 +19,6 @@ export default class Adapter {
 	_sendFile(resolve, reject) {
 		const file = this.loader.file;
 		const ref = this.storageRef;
-
-		console.log('ref has authWrapper', !!ref.authWrapper)
-		console.log('ref has location => path', !!ref.location.path);
-		console.log('These could be a check to ensure the ref is valid');
-
 		this.uploadTask = ref.put(file);
 		this.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
