@@ -14,15 +14,16 @@ export default class FbImageStorage extends Plugin {
 	}
 
 	init() {
-		const fbConfig = this.editor.config.get('fbImageStorage.fbConfig');
-		const storagePath = this.editor.config.get('fbImageStorage.storagePath');
+		// const fbConfig = this.editor.config.get('fbImageStorage.fbConfig');
+		// const storagePath = this.editor.config.get('fbImageStorage.storagePath');
 
-		if (!fbConfig) {
-			console.warn('FbImageStorage will not work without firebase configuration.');
-			return;
-		}
+		// if (!fbConfig) {
+		// 	console.warn('FbImageStorage will not work without firebase configuration.');
+		// 	return;
+		// }
 
 
-		this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, fbConfig, storagePath, this.editor.t);
+		// this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, fbConfig, storagePath, this.editor.t);
+		this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(loader, this.editor.t);
 	}
 }
