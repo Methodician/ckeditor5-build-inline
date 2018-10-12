@@ -6,7 +6,7 @@ import Adapter from './adapter';
 export default class FbImageStorage extends Plugin {
 
 	static get requires() {
-		returns[FileRepository];
+		return [FileRepository];
 	}
 
 	static get pluginName() {
