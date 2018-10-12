@@ -39,7 +39,7 @@ export default class Adapter {
 
 		this.uploadTask = this.storageRef.put(file);
 		console.log(this.uploadTask);
-		this.uploadTask.percentChanges().subscribe(progress => {
+		this.uploadTask.percentageChanges().subscribe(progress => {
 			this.loader.uploadTotal = progress;
 		});
 		const snap = await this.uploadTask.then();
