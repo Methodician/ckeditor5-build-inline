@@ -11,16 +11,18 @@ const app = firebase.initializeApp({
 });
 
 const storage = app.storage();
-const ref = storage.ref('articleBodyImages/');
+// const ref = storage.ref('articleBodyImages/');
 export default class Adapter {
 
-	constructor(loader, t) {
+	ref;
+
+	constructor(storagePath, loader, t) {
 		this.loader = loader;
 		// this.fbConfig = fbConfig;
 		this.t = t;
 		// this.app = firebase.initializeApp(this.fbConfig);
 		// this.storage = app.storage();
-		// this.ref = storage.ref(storagePath);
+		this.ref = storage.ref(storagePath);
 	}
 
 	upload() {
@@ -35,7 +37,7 @@ export default class Adapter {
 
 	_sendFile(resolve, reject) {
 		const file = this.loader.file;
-
+		console.log(file);
 		this.uploadTask = ref.put(file);
 		this.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
