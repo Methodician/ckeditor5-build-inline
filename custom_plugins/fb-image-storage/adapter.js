@@ -35,8 +35,10 @@ export default class Adapter {
 
 	_sendFile(resolve, reject) {
 		const file = this.loader.file;
+		console.log(this.storageRef);
 
 		this.uploadTask = this.storageRef.put(file);
+		console.log(this.uploadTask);
 		this.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			this.loader.uploadTotal = progress;
