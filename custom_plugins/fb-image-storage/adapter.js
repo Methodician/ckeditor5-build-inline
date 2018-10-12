@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/storage'
 
+const self = this;
 const app = firebase.initializeApp({
 	apiKey: 'AIzaSyAb3L-t-WB0rf6A9j8gVSRB9STJJvLUEfw',
 	authDomain: 'cosourcerytest.firebaseapp.com',
@@ -15,35 +16,35 @@ const storage = app.storage();
 export default class Adapter {
 
 	constructor(storagePath, loader, t) {
-		this.loader = loader;
-		// this.fbConfig = fbConfig;
-		this.t = t;
-		// this.app = firebase.initializeApp(this.fbConfig);
-		// this.storage = app.storage();
-		this.ref = storage.ref(storagePath || 'imageUploads/');
+		self.loader = loader;
+		// self.fbConfig = fbConfig;
+		self.t = t;
+		// self.app = firebase.initializeApp(self.fbConfig);
+		// self.storage = app.storage();
+		self.ref = storage.ref(storagePath || 'imageUploads/');
 	}
 
 	upload() {
 		return new Promise((resolve, reject) => {
-			this._sendFile(resolve, reject);
+			self._sendFile(resolve, reject);
 		});
 	}
 
 	abort() {
-		this.uploadTask.cancel();
+		self.uploadTask.cancel();
 	}
 
 	_sendFile(resolve, reject) {
-		const file = this.loader.file;
+		const file = self.loader.file;
 		console.log(file);
-		this.uploadTask = this.ref.child(file.name).put(file);
-		this.uploadTask.on('state_changed', (snapshot) => {
+		self.uploadTask = self.ref.child(file.name).put(file);
+		self.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			this.loader.uploadTotal = progress;
+			self.loader.uploadTotal = progress;
 		}, (err) => {
 			return reject(err);
 		}, () => {
-			this.uploadTask.snapshot.this.ref.getDownloadURL().then((url) => {
+			self.uploadTask.snapshot.self.ref.getDownloadURL().then((url) => {
 				resolve({
 					default: url
 				});
