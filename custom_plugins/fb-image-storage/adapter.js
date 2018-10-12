@@ -33,31 +33,23 @@ export default class Adapter {
 		this.uploadTask.cancel();
 	}
 
-	async _sendFile(resolve, reject) {
+	_sendFile(resolve, reject) {
 		const file = this.loader.file;
 		console.log(this.storageRef);
 
 		this.uploadTask = this.storageRef.put(file);
 		console.log(this.uploadTask);
-		this.uploadTask.percentageChanges().subscribe(progress => {
+		this.uploadTask.on('state_changed', (snapshot) => {
+			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			this.loader.uploadTotal = progress;
+		}, (err) => {
+			return reject(err);
+		}, () => {
+			this.uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+				resolve({
+					default: url
+				});
+			});
 		});
-		const snap = await this.uploadTask.then();
-		const url = await this.storageRef.getDownloadURL().toPromise();
-		resolve({
-			default: url
-		});
-		// this.uploadTask.on('state_changed', (snapshot) => {
-		// 	const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-		// 	this.loader.uploadTotal = progress;
-		// }, (err) => {
-		// 	return reject(err);
-		// }, () => {
-		// 	this.uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-		// 		resolve({
-		// 			default: url
-		// 		});
-		// 	});
-		// });
 	}
 }
