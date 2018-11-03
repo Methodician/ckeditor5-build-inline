@@ -24,7 +24,12 @@ export default class Adapter {
 	_sendFile(resolve, reject) {
 		const file = this.loader.file;
 		const ref = this.storageRef;
-		this.uploadTask = ref.child(file.name).put(file);
+		try {
+			this.uploadTask = ref.child(file.name).put(file);
+			console.log('set upload task in try block', this.uploadTask)
+		} catch (error) {
+			console.log('error in trycatch for setting upload task', error);
+		}
 		this.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			this.loader.uploadTotal = progress;
