@@ -17,9 +17,9 @@ export default class FbImageStorage extends Plugin {
 
 		const storageRef = this.editor.config.get('fbImageStorage.storageRef');
 
-		console.log('ref has authWrapper', !!storageRef.authWrapper)
-		console.log('ref has location => path', !!storageRef.location.path);
-		console.log('These could be a check to ensure the ref is valid');
+		// console.log('ref has authWrapper', !!storageRef.authWrapper)
+		// console.log('ref has location => path', !!storageRef.location.path);
+		// console.log('These could be a check to ensure the ref is valid');
 
 		this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new Adapter(storageRef, loader, this.editor.t);
 
