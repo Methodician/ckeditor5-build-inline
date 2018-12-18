@@ -16,10 +16,20 @@ export default class Adapter {
 		this.uploadTask.cancel();
 	}
 
+	makeId() {
+		let str = '';
+		const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		for (let i = 0; i < 7; i++) {
+			str += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return str;
+	}
+
 	_sendFile(resolve, reject) {
 		const file = this.loader.file;
 		const ref = this.storageRef;
-		const randomId = Math.random().toString(36).substr(7);
+		const randomId = makeId();
 		this.uploadTask = ref.child(randomId).put(file);
 		this.uploadTask.on('state_changed', (snapshot) => {
 			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
