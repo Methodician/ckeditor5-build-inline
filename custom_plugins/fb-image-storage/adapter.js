@@ -20,7 +20,7 @@ export default class Adapter {
 		let str = '';
 		const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-		while (str.length > 7) {
+		while (str.length < 7) {
 			str += possible.charAt(Math.floor(Math.random() * possible.length));
 		}
 		return str;
